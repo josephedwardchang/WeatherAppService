@@ -1,0 +1,1 @@
+@echo sc start foldermonitor
