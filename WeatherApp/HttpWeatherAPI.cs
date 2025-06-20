@@ -37,7 +37,7 @@ namespace WeatherApp
                     client.DefaultRequestHeaders.Accept.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(bRet));
 
-                    var strUrl = ConfigurationManager.AppSettings["paramWeatherGeocodeApi"]; // or use AppSettings["paramWeatherApi"]
+                    var strUrl = ConfigurationManager.AppSettings["paramWeatherGeocodeApi"];
                     if (string.IsNullOrEmpty(cityname))
                     {
                         strUrl = strUrl.Replace("{city}", "");
@@ -115,53 +115,50 @@ namespace WeatherApp
 
         public async Task<JsonWeatherApi> GetJsonWeatherFromCityName(string cityname, string statecode = null, string countrycode = null)
         {
-            JsonWeatherApi objRet = null;
             try
             {
                 var jsonString = await GetWeatherApiAsync(ResultType.json, 0, 0, cityname, statecode, countrycode);
 
-                objRet = JsonSerializer.Deserialize<JsonWeatherApi>(jsonString);
+                m_jsonWeatherApi = JsonSerializer.Deserialize<JsonWeatherApi>(jsonString);
 
             }
             catch (Exception ex)
             {
             }
 
-            return objRet;
+            return m_jsonWeatherApi;
         }
 
         public async Task<XmlWeatherApi> GetXmlWeatherFromCoords(double lon, double lat)
         {
-            XmlWeatherApi objRet = null;
             try
             {
                 var xmlString = await GetWeatherApiAsync(ResultType.xml, lat, lon, "", "", "");
 
-                objRet = JsonSerializer.Deserialize<XmlWeatherApi>(xmlString);
+                m_xmlWeatherApi = JsonSerializer.Deserialize<XmlWeatherApi>(xmlString);
 
             }
             catch (Exception ex)
             {
             }
 
-            return objRet;
+            return m_xmlWeatherApi;
         }
 
         public async Task<JsonWeatherApi> GetJsonWeatherFromCoords(double lon, double lat)
         {
-            JsonWeatherApi objRet = null;
             try
             {
                 var jsonString = await GetWeatherApiAsync(ResultType.json, lat, lon, "", "", "");
 
-                objRet = JsonSerializer.Deserialize<JsonWeatherApi>(jsonString);
+                m_jsonWeatherApi = JsonSerializer.Deserialize<JsonWeatherApi>(jsonString);
 
             }
             catch (Exception ex)
             {
             }
 
-            return objRet;
+            return m_jsonWeatherApi;
         }
     }
 }
