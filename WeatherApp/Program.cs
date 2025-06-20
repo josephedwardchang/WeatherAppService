@@ -57,6 +57,9 @@ namespace WeatherApp
 
                 if(test3.Result != null)
                 {
+                    // can't seem to get the values after deserialization is ok from weather api
+                    // (both json/xml is ok from api) but in the object after deserialization,
+                    // I can't see the values
                     var n = test3.Result;
                 }
             }
