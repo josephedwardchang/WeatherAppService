@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace WindowsAppService
 {
-    public partial class Service : ServiceBase, IFileWatcher, IDisposable
+    public partial class Service : ServiceBase, IFileWatcher
     {
         public void OnChanged(object sender, FileSystemEventArgs e)
         {
@@ -31,12 +31,21 @@ namespace WindowsAppService
             // perform file move
             try
             {
-                File.Move(e.FullPath, m_fileDest);
-                m_logger.Info($"Moved file {e.FullPath} to {m_fileDest}", null);
+                var isExist = File.Exists($"{m_fileDest}{e.Name}");
+                // remove the dest file 1st
+                if (isExist)
+                {
+                    File.Delete($"{m_fileDest}{e.Name}");
+                    m_logger.Info($"Delete {m_fileDest}{e.Name}", null);
+                }
+                
+                File.Move(e.FullPath, string.Format($"{m_fileDest}{e.Name}"));
+                
+                m_logger.Info($"Moved file {e.FullPath} to {m_fileDest}{e.Name}", null);
             }
             catch (Exception ex)
             {
-                m_logger.Fatal($"Can't move file {e.FullPath}", ex);
+                m_logger.Fatal($"Can't move file {e.FullPath} to {m_fileDest}{e.Name}", ex);
             }
         }
 

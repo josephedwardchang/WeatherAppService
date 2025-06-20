@@ -22,6 +22,8 @@ namespace WindowsAppService
                 new Service() 
             };
             ServiceBase.Run(ServicesToRun);
+
+            // after service
         }
     }
 }

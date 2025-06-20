@@ -19,16 +19,20 @@ namespace WindowsAppService
         FileSystemWatcher m_filewatcher = null;
         string m_fileDest = string.Empty;
         bool m_mustExit = false;
+        string m_appdir = string.Empty;
         public Service()
         {
             //InitializeComponent();
 
             m_logger = new CustomLogger();
+            var IsX86FileExist = false;
 
             try
             {
                 m_fileDest = ConfigurationManager.AppSettings["FolderDest"];
                 m_filewatcher = new FileSystemWatcher(ConfigurationManager.AppSettings["FolderSourceMonitor"]);
+                IsX86FileExist = File.Exists("%ProgramFiles(x86)%\\installService_x86.bat");
+                m_appdir = IsX86FileExist ? ConfigurationManager.AppSettings["InstallDir_x86"] : ConfigurationManager.AppSettings["InstallDir"];
             }
             catch
             {
@@ -50,46 +54,9 @@ namespace WindowsAppService
             m_filewatcher.Renamed += OnRenamed;
             m_filewatcher.Error += OnError;
 
-            m_filewatcher.Filter = "*.*";
+            //m_filewatcher.Filter = "*.*";
             m_filewatcher.IncludeSubdirectories = true;
             m_filewatcher.EnableRaisingEvents = true;
-
-            try
-            {
-                //install service
-                ProcessStartInfo psi = new ProcessStartInfo() { 
-                    UseShellExecute = true,
-                    RedirectStandardOutput = false,
-                    RedirectStandardError = false,
-                    RedirectStandardInput = false, 
-                    FileName = "installservice.bat",
-                };
-                var runProc = Process.Start(psi);
-                var bRet = runProc.WaitForExit(60000);
-                if (bRet)
-                {
-                    m_logger.Info("Batch file installservice ran.", null);
-                }
-                // run service
-                ProcessStartInfo psirun = new ProcessStartInfo()
-                {
-                    UseShellExecute = true,
-                    RedirectStandardOutput = false,
-                    RedirectStandardError = false,
-                    RedirectStandardInput = false,
-                    FileName = "runservice.bat",
-                };
-                runProc = Process.Start(psirun);
-                bRet = runProc.WaitForExit(60000);
-                if (bRet)
-                {
-                    m_logger.Info("Batch file runservice ran.", null);
-                }
-            }
-            catch(Exception ex)
-            {
-                m_logger.Fatal("Can't run batch service install/run", ex);
-            }
 
             try
             {
@@ -130,6 +97,18 @@ namespace WindowsAppService
         protected override void OnStop()
         {
             m_logger.Info($"OnStop called", null);
+            m_filewatcher.EnableRaisingEvents = false;
+            this.Dispose();
+        }
+
+        ~Service()
+        {
+            m_filewatcher.Changed -= OnChanged;
+            m_filewatcher.Created -= OnCreated;
+            m_filewatcher.Deleted -= OnDeleted;
+            m_filewatcher.Renamed -= OnRenamed;
+            m_filewatcher.Error -= OnError;
+            m_logger.Info("service destruction", null);
         }
     }
 }

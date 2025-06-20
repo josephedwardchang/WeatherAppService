@@ -3,7 +3,7 @@
 "VSVersion" = "3:800"
 "ProjectType" = "8:{978C614F-708E-4E1A-B201-565925725DBA}"
 "IsWebType" = "8:FALSE"
-"ProjectName" = "8:SetupService"
+"ProjectName" = "8:SetupService_x86"
 "LanguageId" = "3:1033"
 "CodePage" = "3:1252"
 "UILanguageId" = "3:1033"
@@ -15,20 +15,26 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_105667EE187C45A1BBE76FD4792F640A"
+        "MsmKey" = "8:_0F4D1FDC22CF43CAA7F65CC8201E2AD6"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_3ED6E95A4A3A8F20DFF35960ADE2988F"
-        "OwnerKey" = "8:_6A10C800D3BB4334BA2EF12C1E883B7F"
+        "MsmKey" = "8:_34406A727F194759913FA3E35C7A73A3"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_6A10C800D3BB4334BA2EF12C1E883B7F"
         "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_97227C6745C43E097F2D1BB2B2863B65"
+        "OwnerKey" = "8:_6A10C800D3BB4334BA2EF12C1E883B7F"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -40,19 +46,19 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_EEB98840D09BC79F1C8642C4E78F2342"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_6A10C800D3BB4334BA2EF12C1E883B7F"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_3ED6E95A4A3A8F20DFF35960ADE2988F"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_EEB98840D09BC79F1C8642C4E78F2342"
+        "OwnerKey" = "8:_97227C6745C43E097F2D1BB2B2863B65"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -80,6 +86,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    }
+                }
             }
         }
         "Release"
@@ -104,6 +118,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    }
+                }
             }
         }
     }
@@ -126,7 +148,7 @@
                 {
                 "Name" = "8:.NET Framework"
                 "Message" = "8:[VSDNETMSG]"
-                "FrameworkVersion" = "8:.NETFramework,Version=v4.7.2"
+                "FrameworkVersion" = "8:.NETFramework,Version=v4.8.1"
                 "AllowLaterVersions" = "11:FALSE"
                 "InstallUrl" = "8:http://go.microsoft.com/fwlink/?LinkId=863262"
                 }
@@ -134,10 +156,10 @@
         }
         "File"
         {
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_105667EE187C45A1BBE76FD4792F640A"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_0F4D1FDC22CF43CAA7F65CC8201E2AD6"
             {
-            "SourcePath" = "8:..\\WindowsAppService\\installService.bat"
-            "TargetName" = "8:installService.bat"
+            "SourcePath" = "8:..\\WindowsAppService\\installService_x86.bat"
+            "TargetName" = "8:installService_x86.bat"
             "Tag" = "8:"
             "Folder" = "8:_5775C5E30D3B4D4CBB955D7820AE98FC"
             "Condition" = "8:"
@@ -154,14 +176,34 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_3ED6E95A4A3A8F20DFF35960ADE2988F"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_34406A727F194759913FA3E35C7A73A3"
+            {
+            "SourcePath" = "8:..\\WindowsAppService\\runService_x86.bat"
+            "TargetName" = "8:runService_x86.bat"
+            "Tag" = "8:"
+            "Folder" = "8:_5775C5E30D3B4D4CBB955D7820AE98FC"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_97227C6745C43E097F2D1BB2B2863B65"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
             "AssemblyAsmDisplayName" = "8:log4net, Version=3.1.0.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_3ED6E95A4A3A8F20DFF35960ADE2988F"
+                    "_97227C6745C43E097F2D1BB2B2863B65"
                     {
                     "Name" = "8:log4net.dll"
                     "Attributes" = "3:512"
@@ -271,9 +313,9 @@
         "Product"
         {
         "Name" = "8:Microsoft Visual Studio"
-        "ProductName" = "8:SetupService"
+        "ProductName" = "8:SetupService_x86"
         "ProductCode" = "8:{87B9691F-7D00-4F6C-8DE1-F885225607D6}"
-        "PackageCode" = "8:{634BEDF3-94BD-4942-A481-44EA9E9B3C14}"
+        "PackageCode" = "8:{5C8A8F78-CC60-4D7A-B846-061FBA2ADFD9}"
         "UpgradeCode" = "8:{0F637F07-F9DC-4A5C-8975-FDE7E63D623E}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
