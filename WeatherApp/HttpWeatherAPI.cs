@@ -1,16 +1,17 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using System.Linq;
-using System.Net.Http.Headers;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
-using System.Text.Json;
 using System.Threading.Tasks;
+using System.Xml;
 using System.Xml.Serialization;
 using WeatherApp.Models;
-using System.Xml;
+using static WeatherApp.Models.JsonWeatherApi;
 
 namespace WeatherApp
 {
@@ -21,8 +22,8 @@ namespace WeatherApp
 
         public HttpWeatherAPI()
         {
-            m_jsonWeatherApi = null;
-            m_xmlWeatherApi = null;
+            m_jsonWeatherApi = new JsonWeatherApi();
+            m_xmlWeatherApi = new XmlWeatherApi();
         }
 
         private async Task<string> GetWeatherApiAsync(ResultType resultType, double lat, double lon,string cityname = null, string statecode = null, string countrycode = null)
@@ -115,18 +116,19 @@ namespace WeatherApp
 
         public async Task<JsonWeatherApi> GetJsonWeatherFromCityName(string cityname, string statecode = null, string countrycode = null)
         {
+            JsonWeatherApi jsonWeatherApi = new JsonWeatherApi();
             try
             {
                 var jsonString = await GetWeatherApiAsync(ResultType.json, 0, 0, cityname, statecode, countrycode);
 
-                m_jsonWeatherApi = JsonSerializer.Deserialize<JsonWeatherApi>(jsonString);
+                jsonWeatherApi = JsonConvert.DeserializeObject<JsonWeatherApi>(jsonString);
 
             }
             catch (Exception ex)
             {
             }
 
-            return m_jsonWeatherApi;
+            return jsonWeatherApi;
         }
 
         public async Task<XmlWeatherApi> GetXmlWeatherFromCoords(double lon, double lat)
@@ -135,7 +137,7 @@ namespace WeatherApp
             {
                 var xmlString = await GetWeatherApiAsync(ResultType.xml, lat, lon, "", "", "");
 
-                m_xmlWeatherApi = JsonSerializer.Deserialize<XmlWeatherApi>(xmlString);
+                m_xmlWeatherApi = DeserializeXml<XmlWeatherApi>(xmlString, null);
 
             }
             catch (Exception ex)
@@ -151,7 +153,7 @@ namespace WeatherApp
             {
                 var jsonString = await GetWeatherApiAsync(ResultType.json, lat, lon, "", "", "");
 
-                m_jsonWeatherApi = JsonSerializer.Deserialize<JsonWeatherApi>(jsonString);
+                m_jsonWeatherApi = JsonConvert.DeserializeObject<JsonWeatherApi>(jsonString);
 
             }
             catch (Exception ex)

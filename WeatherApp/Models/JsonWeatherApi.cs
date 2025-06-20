@@ -8,7 +8,8 @@ using System.Threading.Tasks;
 namespace WeatherApp.Models
 {
     public class JsonWeatherApi
-    {// Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse);
+    {
+        // Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse);
         public class Clouds
         {
             public int all;

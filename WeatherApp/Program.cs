@@ -30,7 +30,8 @@ namespace WeatherApp
                 {
                     // error: bad request when doing lat/lon coords from Geocode
                     //return await callWeatherApi.GetJsonWeatherFromCoords(lat, lon);
-                    return await callWeatherApi.GetJsonWeatherFromCityName(cityname: City);
+                    var obj = await callWeatherApi.GetJsonWeatherFromCityName(cityname: City);
+                    return obj;
                 });
                 Console.WriteLine(test1.Result.ToString());
             }
@@ -49,9 +50,15 @@ namespace WeatherApp
 
                 var test3 = Task.Run(async () =>
                 {
-                    return await callWeatherApi.GetXmlWeatherFromCityName(cityname: City);
+                    var obj = await callWeatherApi.GetXmlWeatherFromCityName(cityname: City);
+                    return obj;
                 });
                 Console.WriteLine(test3.Result.ToString());
+
+                if(test3.Result != null)
+                {
+                    var n = test3.Result;
+                }
             }
         }
     }
