@@ -1,2 +1,2 @@
-@echo sc create foldermonitor binPath= "%ProgramFiles(x86)%\WindowsAppService.exe"
-@echo sc start foldermonitor
+sc create foldermonitor binPath="%programfiles(x86)%\traxion\WindowsAppService\WindowsAppService.exe"
+sc start foldermonitor

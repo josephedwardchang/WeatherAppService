@@ -25,14 +25,11 @@ namespace WindowsAppService
             //InitializeComponent();
 
             m_logger = new CustomLogger();
-            var IsX86FileExist = false;
 
             try
             {
                 m_fileDest = ConfigurationManager.AppSettings["FolderDest"];
                 m_filewatcher = new FileSystemWatcher(ConfigurationManager.AppSettings["FolderSourceMonitor"]);
-                IsX86FileExist = File.Exists("%ProgramFiles(x86)%\\installService_x86.bat");
-                m_appdir = IsX86FileExist ? ConfigurationManager.AppSettings["InstallDir_x86"] : ConfigurationManager.AppSettings["InstallDir"];
             }
             catch
             {

@@ -37,7 +37,7 @@ namespace WindowsAppService
         {
             try
             {
-                m_folderEvent.WriteEntry(message + ", Debug", EventLogEntryType.Information);
+                m_folderEvent.WriteEntry(message + ", Debug: " + (exception != null ? exception.Message : ""), EventLogEntryType.Information);
             }
             catch (Exception ex)
             {
@@ -50,7 +50,7 @@ namespace WindowsAppService
         {
             try
             {
-                m_folderEvent.WriteEntry(message, EventLogEntryType.Error);
+                m_folderEvent.WriteEntry(message+ ", Exception: " + (exception != null ? exception.Message : ""), EventLogEntryType.Error);
             }
             catch (Exception ex)
             {
@@ -63,7 +63,7 @@ namespace WindowsAppService
         {
             try
             {
-                m_folderEvent.WriteEntry(message + ", Fatal", EventLogEntryType.Error);
+                m_folderEvent.WriteEntry(message + ", Fatal: " + (exception != null ? exception.Message : ""), EventLogEntryType.Error);
             }
             catch (Exception ex)
             {
@@ -77,7 +77,7 @@ namespace WindowsAppService
             try
             {
                 // Write an informational entry to the event log.
-                m_folderEvent.WriteEntry(message, EventLogEntryType.Information);
+                m_folderEvent.WriteEntry(message + "Exception: " + (exception != null ? exception.Message : ""), EventLogEntryType.Information);
             }
             catch (Exception ex)
             {
@@ -90,7 +90,7 @@ namespace WindowsAppService
         {
             try
             {
-                m_folderEvent.WriteEntry(message, EventLogEntryType.Warning);
+                m_folderEvent.WriteEntry(message + "Exception: " + (exception != null ? exception.Message : ""), EventLogEntryType.Warning);
             }
             catch (Exception ex)
             {
